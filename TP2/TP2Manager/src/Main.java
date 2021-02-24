@@ -23,7 +23,6 @@ public class Main {
                     "\n2 -> Visualizar os 10 processos que maior percentagem de RAM utilizaram;"+
             "\n3 -> Visualizar os 10 processos que maior percentagem de RAM utilizaram num dia;"
             + "\n4 -> Visualizar os processos que não utilizam nem RAM nem CPU"
-            + "\n5 -> Visuzalizar os 10 processos que mais utilizam CPU"
             );
 
             int opt = sc.nextInt();
@@ -46,10 +45,18 @@ public class Main {
                         if(!host2.equals("default")) {
                             hostName = host2;
                         }
-                        Charts chart1 = new Charts("10 processos que maior percentagem de RAM utilizaram",
-                         querys.getPRamAlltime(r.execReader(hostName)));
-                        chart1.runChart("10 processos que maior percentagem de RAM utilizaram",
-                                querys.getPRamAlltime(r.execReader(hostName)));
+
+                        System.out.println("10 processos que maior percentagem de RAM utilizaram : \n");
+                        ArrayList<SnmpInfo> info1 = querys.getPRamAlltime(r.execReader(hostName));
+                        for(SnmpInfo s : info1){
+
+                            String res = ("Id: "+s.getProcessId() +", Nome: "+ s.getProcessName()
+                                    +", percentagem de uso: "+s.getProcessAllocatedMem()+ "%");
+                            if(Integer.parseInt(s.getProcessAllocatedMem())>=20){
+                                res += " !!! Warning de utilização de RAM!!!";
+                            }
+                            System.out.println(res);
+                        }
 
                         break;
 
@@ -63,11 +70,16 @@ public class Main {
                         }
                         System.out.println("Introduza o dia no formato dia-mes-ano");
                         String dia = sc.next();
-                        Charts chart2 = new Charts("10 processos que maior percentagem de RAM utilizaram no dia " +dia ,
-                                querys.getPRamDia(dia,r.execReader(hostName)) );
-                        chart2.runChart("10 processos que maior percentagem de RAM utilizaram no dia " +dia ,
-                                querys.getPRamDia(dia,r.execReader(hostName)) );
-
+                        System.out.println("10 processos que maior percentagem de RAM utilizaram no dia "+dia+ ":\n");
+                        ArrayList<SnmpInfo> info2 = querys.getPRamDia(dia,r.execReader(hostName));
+                        for(SnmpInfo s : info2){
+                            String res = ("Id: "+s.getProcessId() +", Nome: "+ s.getProcessName()
+                                    +", percentagem de uso: "+s.getProcessAllocatedMem()+ "%");
+                            if(Integer.parseInt(s.getProcessAllocatedMem())>=20){
+                                res += " !!! Warning de utilização de RAM!!!";
+                            }
+                            System.out.println(res);
+                        }
                         break;
 
                     case 4:

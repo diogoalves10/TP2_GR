@@ -47,9 +47,8 @@ public class Querys {
         }
         JSONObject obj = res.get(0);
         ram = Integer.parseInt((String) obj.get("TotalMemorySize"));
-        System.out.println("ram: " +ram);
+
         for(SnmpInfo s : aux){ //ordenamos toda a informação pelos que usam mais memória ram
-          //  int temp = Integer.parseInt(s.getProcessAllocatedMem());
 
             tmap.put(Integer.parseInt(s.getProcessAllocatedMem()),s);
         }
@@ -64,9 +63,7 @@ public class Querys {
 
           Integer temp = Integer.parseInt(s.getProcessAllocatedMem());
           Integer i = (temp*100)/ram;
-          System.out.println("Antes de entrar" + s.getProcessAllocatedMem());
           s.setProcessAllocatedMem(i.toString());
-          System.out.println("Depois de entrar" + s.getProcessAllocatedMem());
 
       }
 
@@ -85,7 +82,7 @@ public class Querys {
         for(JSONObject j : array){
             res.add(j);
         }
-        //problema tem de estar aqui
+
         for(JSONObject j : res){ //para todos os objectos vamos buscar o array snmpdata e guardamos a informação num arraylist de snmpInfo
             JSONArray jsonArray = new JSONArray();
             jsonArray = (JSONArray)j.get("snmpData");
@@ -97,8 +94,6 @@ public class Querys {
         ram = Integer.parseInt((String) obj.get("TotalMemorySize"));
 
         for(SnmpInfo s : aux){ //ordenamos toda a informação pelos que usam mais memória ram
-            //  int temp = Integer.parseInt(s.getProcessAllocatedMem());
-
             tmap.put(Integer.parseInt(s.getProcessAllocatedMem()),s);
         }
 
@@ -118,10 +113,6 @@ public class Querys {
 
 
         return fin;
-    }
-
-    public void getCPUInfoDia(){ //percentagem de utilização de cpu
-
     }
 
     public Set<String> getPIDSzero(ArrayList<JSONObject> array){ //todos os processos que estão a 0 no cpu e na ram

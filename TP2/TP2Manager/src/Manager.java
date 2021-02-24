@@ -54,7 +54,7 @@ public class Manager {
 
     public String getGet(OID oid) throws IOException {
         String res=null;
-      //  VariableBinding vb ;
+
         Snmp snmp = new Snmp(new DefaultUdpTransportMapping());
         snmp.listen();
 
