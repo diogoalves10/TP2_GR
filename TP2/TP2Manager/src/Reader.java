@@ -18,16 +18,6 @@ public class Reader {
         array = fr.jsonToArray(path);
 
         return array;
-        // fin = q.getPRamDia("15-02-2021",array);
-       /* fin = q.getPRamAlltime(array);
 
-         for (SnmpInfo s : fin){
-             System.out.println(
-                     "PID : " + s.getProcessId() + "\nName : " + s.getProcessName()
-                             + "\nAllocated : "+ s.getProcessAllocatedMem()
-             );
-         }
-
-        */
     }
 }
